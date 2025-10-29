@@ -34,11 +34,27 @@ namespace GameProg_HighScore_ZanderG
                 }
             }
 
-            string finalScore = $"{name}: {score}";
+            string finalScore = $"{score}: {name}";
 
             allFinalScore.Add(finalScore);
+            string[] dataList = File.ReadAllLines(path);
+
+            for (int i = 0; i < dataList.Length; i++)
+            {
+                allFinalScore.Add(dataList[i]);
+            }
 
             File.WriteAllLines(path, allFinalScore);
+            File.ReadAllLines(path);
+
+            dataList = File.ReadAllLines(path);
+            Array.Sort(dataList);
+            Array.Reverse(dataList);
+
+            for (int i = 0; i < dataList.Length; i++)
+            {
+                Console.WriteLine(dataList[i]);
+            }
 
             Console.WriteLine("Press any key to end the game...");
             Console.ReadKey(true);
